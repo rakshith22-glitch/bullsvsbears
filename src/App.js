@@ -197,7 +197,7 @@ function App() {
         response.data.items.forEach((elements) => {
           if (elements.chan_filter === "GOLDEN")
             new_golden_sweeps.push(elements);
-          setsweeplength(new_golden_sweeps.length / 2);
+          setsweeplength(new_golden_sweeps.length);
         });
         console.log("new_golden_sweeps.length", new_golden_sweeps.length);
         setLoadingData(false);
