@@ -38,23 +38,24 @@ function PieChartData() {
   let putspercentage = Math.floor(
     ((totalcount - callscount) / totalcount) * 100
   );
+  let cpercent = parseInt(callpercentage);
+  let ppercent = parseInt(putspercentage);
   const data2 = [
     {
-      title: "CALLS",
-      value: callpercentage,
+      title: cpercent,
+      value: cpercent,
       color: "#61c419",
       key: "CALLS",
     },
     {
-      title: "PUTS",
-      value: putspercentage,
+      title: ppercent,
+      value: ppercent,
       color: "#FA1414",
       key: "PUTS",
     },
   ];
   const lineWidth = 60;
-  console.log("asdasdasdasdasdasd ", callpercentage);
-  console.log("asdasdasdasdasdasd ", putspercentage);
+
   return (
     <div style={{ width: "15%" }}>
       <PieChart
