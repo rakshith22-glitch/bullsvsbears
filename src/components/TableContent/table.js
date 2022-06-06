@@ -23,7 +23,8 @@ import bullsbears from "./bullsbears.jpg";
 import TableSortLabel from "@mui/material/TableSortLabel";
 import TextField from "@mui/material/TextField";
 import PieChart from "../PieChart/piechart";
-
+import emailjs from '@emailjs/browser'
+import "./table.css";
 function TableContent() {
   const [data, setData] = useState([]);
   const [sweeplength, setsweeplength] = useState("");
@@ -170,9 +171,11 @@ function TableContent() {
   ]);
 
   // ---------------------------------------------------------- TABLE DATA -------------------------------------------------//
-
   useEffect(() => {
-    async function getData() {
+    setLoadingData(false);
+    getData();
+  }, []);
+  const getData = async () => {
       await axios.get(url).then((response) => {
         // check if the data is populated
         console.log(response.data);
@@ -182,11 +185,11 @@ function TableContent() {
         setrows(response.data.items);
       });
     }
-    if (loadingData) {
-      // if the result is not ready so you make the axios call
-      getData();
-    }
-  }, []);
+    // if (loadingData) {
+    //   // if the result is not ready so you make the axios call
+    //   getData();
+    // }
+  ;
 
   // ---------------------------------------------------------- Notification Button  -------------------------------------------------//
   useEffect(() => {
@@ -196,10 +199,19 @@ function TableContent() {
         console.log(response.data);
         setData(response.data.items);
         response.data.items.forEach((elements) => {
-          if (elements.chan_filter === "GOLDEN")
-            new_golden_sweeps.push(elements);
-          setsweeplength(new_golden_sweeps.length);
-        });
+          if (elements.chan_filter === "GOLDEN"){
+          emailjs.sendForm('service_sgzy83k', 'template_zsbwfg9', elements.descripton, 'CARXvMR1wTAs9RTUU')
+          .then((result) => {
+              console.log(result.text);
+          }, (error) => {
+              console.log(error.text);
+          });
+          new_golden_sweeps.push(elements);
+        } 
+          });
+            
+      
+            setsweeplength(new_golden_sweeps.length);
         console.log("new_golden_sweeps.length", new_golden_sweeps.length);
         setLoadingData(false);
       });
@@ -234,7 +246,7 @@ function TableContent() {
     });
   }
   function Regular() {
-    window.location.reload(false);
+    getData();
   }
 
   const handleChange = (event) => {
@@ -324,23 +336,20 @@ function TableContent() {
     rowsPerPage: PropTypes.number.isRequired,
   };
   return (
-    <div>
-      <div style={{ marginBottom: "-250px" }}>
-        <PieChart />
-      </div>
-      <div style={{ height: "100px", marginTop: "25px", marginLeft: "20%" }}>
-        <img
+    <div >
+      
+      {/* <div style={{display:"flex", justifyContent:"center", alignItems:"center", width:"80%", marginLeft:"5%" }}> */}
+        
+        {/* <img
           src={bullsbears}
           alt="bullsbears"
           style={{ width: "80%", height: "200px" }}
-        />
-      </div>
+        /> */}
+      {/* </div> */}
       <div
-        style={{
-          marginLeft: "35%",
-          marginTop: "50px",
-        }}
+        style={{display:"flex", justifyContent:"center", alignItems:"center", width:"80%", marginLeft:"8%", marginBottom:"2%" }}
       >
+        <PieChart />
         <Button
           style={{
             backgroundColor: "gold",
@@ -426,7 +435,7 @@ function TableContent() {
         </Button>
       </div>
 
-      <div style={{ width: "80%", marginLeft: "10%" }}>
+      <div style={{display:"flex", justifyContent:"center", alignItems:"center", width:"80%", marginLeft:"10%" }}>
         {/* here you check if the state is loading otherwise if you wioll not call that you will get a blank page because the data is an empty array at the moment of mounting */}
         {loadingData ? (
           <p>Loading Please wait...</p>
@@ -438,39 +447,40 @@ function TableContent() {
               size="small"
               aria-label="a dense table"
               style={{
-                marginTop: "20px",
-                backgroundColor: "antiquewhite",
-                border: "3px solid black",
+                
+                backgroundColor: "gray",
+                border: "3px solid gray",
                 fontSize: "10px",
+                
               }}
             >
               <TableHead
                 style={{
-                  backgroundColor: "gray",
+                  backgroundColor: "white",
                   height: "60px",
                 }}
               >
                 <TableRow>
                   <TableCell
-                    style={{ width: "20px", fontWeight: "bold" }}
+                    style={{ fontWeight: "bold" }}
                     align="center"
                   >
                     TICKER
                   </TableCell>
                   <TableCell
-                    style={{ width: "120px", fontWeight: "bold" }}
+                    style={{ fontWeight: "bold" , width:"30%" }}
                     align="center"
                   >
-                    Description
+                    DESCRIPTION
                   </TableCell>
                   <TableCell
-                    style={{ width: "20px", fontWeight: "bold" }}
-                    align="right"
+                    style={{  fontWeight: "bold" }}
+                    align="left"
                   >
-                    DATE_EXP
+                    EXP
                   </TableCell>
                   <TableCell
-                    style={{ width: "20px", fontWeight: "bold" }}
+                    style={{  fontWeight: "bold" }}
                     align="center"
                   >
                     DATE
@@ -478,34 +488,34 @@ function TableContent() {
                   {/* <TableCell align="right">data</TableCell> */}
 
                   <TableCell
-                    style={{ width: "20px", fontWeight: "bold" }}
+                    style={{  fontWeight: "bold" }}
                     align="center"
                   >
                     INTEREST
                   </TableCell>
                   <TableCell
-                    style={{ width: "20px", fontWeight: "bold" }}
+                    style={{ fontWeight: "bold" }}
                     align="center"
                   >
                     OPTIONS SIZE
                   </TableCell>
                   <TableCell
-                    style={{ width: "20px", fontWeight: "bold" }}
+                    style={{  fontWeight: "bold" }}
                     align="right"
                   >
                     SPOT
                   </TableCell>
                   <TableCell
-                    style={{ width: "20px", fontWeight: "bold" }}
+                    style={{  fontWeight: "bold" }}
                     align="center"
                   >
                     PRICE
                   </TableCell>
                   <TableCell
-                    style={{ width: "20px", fontWeight: "bold" }}
-                    align="left"
+                    style={{  fontWeight: "bold" }}
+                    align="center"
                   >
-                    PUT/CALL-SNTMNT
+                    PUT/CALL
                   </TableCell>
                 </TableRow>
               </TableHead>
@@ -529,35 +539,35 @@ function TableContent() {
                       {data.description}
                     </TableCell> */}
                     <TableCell
-                      style={{ width: "20px", fontWeight: "bold" }}
+                      style={{color:"white"}}
                       align="center"
                     >
                       {data.ticker}
                     </TableCell>
-                    <TableCell style={{ width: "120px" }} align="right">
+                    <TableCell style={{color:"white"}} align="right">
                       {data.description}
                     </TableCell>
                     <TableCell
-                      style={{ width: "30px", paddingRight: "40px" }}
+                      style={{ color:"white",  paddingRight: "40px" }}
                       align="right"
                     >
                       {data.date_expiration}
                     </TableCell>
                     <TableCell
-                      style={{ width: "50px", paddingRight: "40px" }}
+                      style={{color:"white"}}
                       align="right"
                     >
                       {data.date}
                     </TableCell>
                     {/* <TableCell align="right">{data.volume}</TableCell> */}
 
-                    <TableCell style={{ width: "20px" }} align="center">
+                    <TableCell  style={{color:"white"}} align="center">
                       {data.open_interest}
                     </TableCell>
-                    <TableCell style={{ width: "20px" }} align="center">
+                    <TableCell style={{color:"white"}} align="center">
                       {data.size}
                     </TableCell>
-                    <TableCell style={{ width: "20px" }} align="right">
+                    <TableCell  style={{color:"white"}} align="right">
                       {data.spot}
                     </TableCell>
                     {/* <TableCell style={{ width: "20px" }} align="right">
@@ -565,9 +575,9 @@ function TableContent() {
                     </TableCell> */}
                     <TableCell
                       style={{
-                        width: "20px",
+                      
                         fontWeight: "bold",
-                        color: "red",
+                        color: "black",
                       }}
                       align="center"
                     >

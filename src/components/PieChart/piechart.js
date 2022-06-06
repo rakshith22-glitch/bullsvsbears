@@ -42,13 +42,13 @@ function PieChartData() {
     {
       title: "CALLS",
       value: callpercentage,
-      color: "#61c419",
+      color: "green",
       key: "CALLS",
     },
     {
       title: "PUTS",
       value: putspercentage,
-      color: "#FA1414",
+      color: "red",
       key: "PUTS",
     },
   ];
@@ -62,6 +62,7 @@ function PieChartData() {
           fontFamily:
             '"Nunito Sans", -apple-system, Helvetica, Arial, sans-serif',
           fontSize: "8px",
+          color:"black"
         }}
         radius={PieChart.defaultProps.radius - 6}
         segmentsStyle={{ transition: "stroke .3s", cursor: "pointer" }}
@@ -83,6 +84,7 @@ function PieChartData() {
         }}
         data={data2}
       />
+      
     </div>
   );
 }
