@@ -4,8 +4,10 @@ import Hello from "./pages/Hello/hello";
 import TableContent from "./components/TableContent/table";
 import Navbar from "./components/Navbar/index";
 import PieChartData from "./components/PieChart/piechart";
+import './App.css'
 function App() {
   return (
+    <div className="fill-window">
     <BrowserRouter>
       <Navbar />
       <Routes>
@@ -14,6 +16,7 @@ function App() {
         <Route path="PieChartData" element={<PieChartData />} />
       </Routes>
     </BrowserRouter>
+    </div>
   );
 }
 export default App;

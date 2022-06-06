@@ -23,11 +23,9 @@ const Navbar = () => {
             <img style={{ width: "150px" }} src={logo} />
           </NavLink>
           <NavLink to="/table" activeStyle>
-            Table
+            Options
           </NavLink>
-          <NavLink to="/PieChartData" activeStyle>
-            PieChartData
-          </NavLink>
+      
         </NavMenu>
       </Nav>
     </div>

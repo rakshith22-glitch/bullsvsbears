@@ -1,0 +1,3 @@
+tableRow:nth-child(odd){
+    background-color: black;
+}
