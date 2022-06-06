@@ -24,7 +24,7 @@ function PieChartData() {
           if (elements.put_call === "CALL") callcount.push(elements);
         });
         console.log(callcount);
-        setcallscount(callcount.length / 2);
+        setcallscount(callcount.length);
         settotalcount(response.data.items.length);
         setLoadingData(false);
       });
