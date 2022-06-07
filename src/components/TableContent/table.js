@@ -28,6 +28,8 @@ import "./table.css";
 function TableContent() {
   const [data, setData] = useState([]);
   const [sweeplength, setsweeplength] = useState("");
+  const [callscount, setcallscount] = useState("");
+  const [putscount, setputscount] = useState("");
   const [loadingData, setLoadingData] = useState(true);
   const [message, setMessage] = useState("");
   const [data2, setData2] = useState([]);
@@ -183,12 +185,23 @@ function TableContent() {
         // you tell it that you had the result
         setLoadingData(false);
         setrows(response.data.items);
+        let callscountarray = [];
+        let  putscountarray= [];
+        response.data.items.forEach((elements) => {
+          if (elements.put_call === "CALL"){
+            callscountarray.push(elements);
+          }
+        })
+        response.data.items.forEach((elements) => {
+          if (elements.put_call === "PUT"){
+            putscountarray.push(elements);
+          }
+        })
+        setcallscount(callscountarray.length);
+        setputscount(putscountarray.length);
       });
     }
-    // if (loadingData) {
-    //   // if the result is not ready so you make the axios call
-    //   getData();
-    // }
+    
   ;
 
   // ---------------------------------------------------------- Notification Button  -------------------------------------------------//
@@ -349,6 +362,9 @@ function TableContent() {
       <div
         style={{display:"flex", justifyContent:"center", alignItems:"center", width:"80%", marginLeft:"8%", marginBottom:"2%" }}
       >
+        <div>
+         CALLS : {callscount} <br/> PUTS :{putscount}
+        </div>
         <PieChart />
         <Button
           style={{
