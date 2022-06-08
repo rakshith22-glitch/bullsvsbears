@@ -26,7 +26,7 @@ import TextField from "@mui/material/TextField";
 import PieChart from "../PieChart/piechart";
 import emailjs from "@emailjs/browser";
 import "./table.css";
-function TableContent() {
+function Golden() {
   const [data, setData] = useState([]);
   const [sweeplength, setsweeplength] = useState("");
   const [loadingData, setLoadingData] = useState(true);
@@ -36,8 +36,7 @@ function TableContent() {
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [rows, setrows] = useState([]);
   const [goldenemail, setgoldenemail] = useState([]);
-  let new_golden_sweeps = [];
-  let golden_sweeps_email = [];
+
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
@@ -180,8 +179,8 @@ function TableContent() {
   const getData = async () => {
     try {
       await axios.get(url).then((response) => {
+        // check if the data is populated
         let new_golden_sweeps = [];
-        let put_count = [];
         let golden_sweeps_email = [];
         console.log(response.data);
         setData(response.data.items);
@@ -192,11 +191,10 @@ function TableContent() {
             golden_sweeps_email.push(elements);
           }
         });
+        setrows(new_golden_sweeps);
+        setsweeplength(golden_sweeps_email.length);
 
-        setsweeplength(new_golden_sweeps.length);
-        // console.log("new_golden_sweeps.length", new_golden_sweeps.length);
         setLoadingData(false);
-        setrows(response.data.items);
       });
     } catch (err) {
       // catches errors both in fetch and response.json
@@ -206,21 +204,6 @@ function TableContent() {
       setTimeout(getData, 2000);
     }
   };
-  // emailjs
-  //   .send(
-  //     "service_sgzy83k",
-  //     "template_zsbwfg9",
-  //     elements_description,
-  //     "CARXvMR1wTAs9RTUU"
-  //   )
-  //   .then(
-  //     (result) => {
-  //       console.log(result.text);
-  //     },
-  //     (error) => {
-  //       console.log(error.text);
-  //     }
-  //   );
 
   const handleChange = (event) => {
     setMessage(event.target.value.toUpperCase());
@@ -362,7 +345,7 @@ function TableContent() {
             ALL OPTIONS
           </Button>
         </Link>
-        <Link to="/CallsOnly">
+        <Link to="/PutsOnly">
           <Button
             style={{
               backgroundColor: "orange",
@@ -374,7 +357,7 @@ function TableContent() {
             PUTS
           </Button>
         </Link>
-        <Link to="/PutsOnly">
+        <Link to="/CallsOnly">
           <Button
             style={{
               backgroundColor: "lightgreen",
@@ -386,7 +369,6 @@ function TableContent() {
             CALLS
           </Button>
         </Link>
-
         <TextField
           id="message"
           name="message"
@@ -590,4 +572,4 @@ function TableContent() {
   );
 }
 
-export default TableContent;
+export default Golden;
