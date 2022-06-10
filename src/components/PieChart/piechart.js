@@ -34,10 +34,8 @@ function PieChartData() {
       getData();
     }
   }, []);
-  let callpercentage = Math.floor((callscount / totalcount) * 100);
-  let putspercentage = Math.floor(
-    ((totalcount - callscount) / totalcount) * 100
-  );
+  let callpercentage = parseInt(callscount);
+  let putspercentage = parseInt(totalcount - callscount);
   const data2 = [
     {
       title: "CALLS",
@@ -53,8 +51,8 @@ function PieChartData() {
     },
   ];
   const lineWidth = 60;
-  console.log("asdasdasdasdasdasd ", callpercentage);
-  console.log("asdasdasdasdasdasd ", putspercentage);
+  console.log("CALLS COUNT ", callpercentage);
+  console.log("PUTS COUNT ", totalcount - callpercentage);
   return (
     <div style={{ width: "15%" }}>
       <PieChart
@@ -62,7 +60,7 @@ function PieChartData() {
           fontFamily:
             '"Nunito Sans", -apple-system, Helvetica, Arial, sans-serif',
           fontSize: "8px",
-          color:"black"
+          color: "black",
         }}
         radius={PieChart.defaultProps.radius - 6}
         segmentsStyle={{ transition: "stroke .3s", cursor: "pointer" }}
@@ -84,7 +82,6 @@ function PieChartData() {
         }}
         data={data2}
       />
-      
     </div>
   );
 }

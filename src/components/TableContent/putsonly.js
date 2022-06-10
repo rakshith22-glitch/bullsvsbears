@@ -26,7 +26,7 @@ import TextField from "@mui/material/TextField";
 import PieChart from "../PieChart/piechart";
 import emailjs from "@emailjs/browser";
 import "./table.css";
-function TableContent() {
+function PutsOnly() {
   const [data, setData] = useState([]);
   const [sweeplength, setsweeplength] = useState("");
   const [loadingData, setLoadingData] = useState(true);
@@ -37,7 +37,7 @@ function TableContent() {
   const [rows, setrows] = useState([]);
   const [goldenemail, setgoldenemail] = useState([]);
   let new_golden_sweeps = [];
-  let golden_sweeps_email = [];
+
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
@@ -183,20 +183,26 @@ function TableContent() {
         let new_golden_sweeps = [];
         let put_count = [];
         let golden_sweeps_email = [];
+        // check if the data is populated
         console.log(response.data);
         setData(response.data.items);
         // you tell it that you had the result
+        response.data.items.forEach((elements) => {
+          if (elements.put_call === "PUT") {
+            new_golden_sweeps.push(elements);
+            put_count.push(elements);
+          }
+        });
+
         response.data.items.forEach((elements) => {
           if (elements.chan_filter === "GOLDEN") {
             new_golden_sweeps.push(elements);
             golden_sweeps_email.push(elements);
           }
         });
-
-        setsweeplength(new_golden_sweeps.length);
-        // console.log("new_golden_sweeps.length", new_golden_sweeps.length);
+        setsweeplength(golden_sweeps_email.length);
         setLoadingData(false);
-        setrows(response.data.items);
+        setrows(put_count);
       });
     } catch (err) {
       // catches errors both in fetch and response.json
@@ -206,21 +212,33 @@ function TableContent() {
       setTimeout(getData, 2000);
     }
   };
-  // emailjs
-  //   .send(
-  //     "service_sgzy83k",
-  //     "template_zsbwfg9",
-  //     elements_description,
-  //     "CARXvMR1wTAs9RTUU"
-  //   )
-  //   .then(
-  //     (result) => {
-  //       console.log(result.text);
-  //     },
-  //     (error) => {
-  //       console.log(error.text);
-  //     }
-  //   );
+
+  //   function GoldenSweeps() {
+  //     let golden_sweeps = [];
+  //     data.forEach((elements) => {
+  //       if (elements.chan_filter === "GOLDEN") golden_sweeps.push(elements);
+  //       setrows(golden_sweeps);
+  //     });
+  //   }
+
+  //   function allCalls() {
+  //     let calls = [];
+  //     data.forEach((elements) => {
+  //       if (elements.put_call === "CALL") calls.push(elements);
+  //       setrows(calls);
+  //     });
+  //   }
+
+  //   function allPuts() {
+  //     let puts = [];
+  //     data.forEach((elements) => {
+  //       if (elements.put_call === "PUT") puts.push(elements);
+  //       setrows(puts);
+  //     });
+  //   }
+  function Regular() {
+    getData();
+  }
 
   const handleChange = (event) => {
     setMessage(event.target.value.toUpperCase());
@@ -362,7 +380,8 @@ function TableContent() {
             ALL OPTIONS
           </Button>
         </Link>
-        <Link to="/CallsOnly">
+
+        <Link to="/PutsOnly">
           <Button
             style={{
               backgroundColor: "orange",
@@ -374,7 +393,8 @@ function TableContent() {
             PUTS
           </Button>
         </Link>
-        <Link to="/PutsOnly">
+
+        <Link to="/CallsOnly">
           <Button
             style={{
               backgroundColor: "lightgreen",
@@ -590,4 +610,4 @@ function TableContent() {
   );
 }
 
-export default TableContent;
+export default PutsOnly;

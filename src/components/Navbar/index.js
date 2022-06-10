@@ -25,7 +25,9 @@ const Navbar = () => {
           <NavLink to="/table" activeStyle>
             Options
           </NavLink>
-      
+          <NavLink to="/crypto" activeStyle>
+            Crypto
+          </NavLink>
         </NavMenu>
       </Nav>
     </div>
