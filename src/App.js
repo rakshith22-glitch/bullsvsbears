@@ -8,8 +8,12 @@ import Crypto from "./components/Crypto/crypto";
 import CallsOnly from "./components/TableContent/callsonly";
 import PutsOnly from "./components/TableContent/putsonly";
 import Golden from "./components/TableContent/goldensweeps";
+import useAnalyticsEventTracker from "./components/useAnalyticsEventTracker";
+import ReactGA from "react-ga";
 import "./App.css";
 function App() {
+  const TRACKING_ID = "UA-231583167-1"; // OUR_TRACKING_ID
+  ReactGA.initialize(TRACKING_ID);
   return (
     <div className="fill-window">
       <BrowserRouter>

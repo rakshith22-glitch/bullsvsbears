@@ -6,12 +6,15 @@ import {
   NavMenu,
   NavBtn,
   NavBtnLink,
-} from "./NavbarElements";
+} from "././NavbarElements";
 import { useHistory } from "react-router-dom";
 import { useState, useEffect } from "react";
 import logo from "./bullsbears.jpg";
+import ReactGA from "react-ga";
+import useAnalyticsEventTracker from "../useAnalyticsEventTracker";
 
 const Navbar = () => {
+  const gaEventTracker = useAnalyticsEventTracker("Contact us");
   return (
     <div>
       <Nav
@@ -25,7 +28,11 @@ const Navbar = () => {
           <NavLink to="/table" activeStyle>
             Options
           </NavLink>
-          <NavLink to="/crypto" activeStyle>
+          <NavLink
+            to="/crypto"
+            onClick={() => gaEventTracker("call")}
+            activeStyle
+          >
             Crypto
           </NavLink>
         </NavMenu>
