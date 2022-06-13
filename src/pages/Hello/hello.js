@@ -81,7 +81,7 @@ function Hello() {
               <Typography paragraph style={{ color: "white" }}>
                 <h3>
                   1. Gives list of Calls and Puts coming in realtime during
-                  market hours. <br /> <br />
+                  market hours. <br />
                   2. Pie Chart Shows Market Sentiment (RED : BEARISH) and
                   (GREEN: BULLISH).
                 </h3>
@@ -122,7 +122,7 @@ function Hello() {
             <CardContent style={{ color: "white" }}>
               <Typography paragraph>
                 <h3>
-                  1.Email alert service for Golden Options
+                  1.Email notification service
                   <br />
                   2. User Authentication <br />
                   3. Free Subscription <br /> 4. Discord
@@ -163,10 +163,12 @@ function Hello() {
           <Collapse in={expanded3} timeout="auto" unmountOnExit>
             <CardContent style={{ color: "white" }}>
               <Typography paragraph>
-                1. Gives alerts on Calls and Puts coming in realtime during
-                market hours. <br /> <br />
-                2. Pie Chart Shows Market Sentiment (RED : BEARISH) and (GREEN:
-                BULLISH).
+                <h3>
+                  1.Crypto Alerts from well known discord channels <br />
+                  2.Crypto News
+                  <br />
+                  3. Biggest Winners, Biggest Loosers, Hot Crypto
+                </h3>
               </Typography>
             </CardContent>
           </Collapse>

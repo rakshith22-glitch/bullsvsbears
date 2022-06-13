@@ -362,7 +362,7 @@ function TableContent() {
             ALL OPTIONS
           </Button>
         </Link>
-        <Link to="/CallsOnly">
+        <Link to="/PutsOnly">
           <Button
             style={{
               backgroundColor: "orange",
@@ -374,7 +374,7 @@ function TableContent() {
             PUTS
           </Button>
         </Link>
-        <Link to="/PutsOnly">
+        <Link to="/CallsOnly">
           <Button
             style={{
               backgroundColor: "lightgreen",

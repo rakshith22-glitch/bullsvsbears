@@ -23,7 +23,7 @@ const Navbar = () => {
         <Bars />
         <NavMenu>
           <NavLink to="/" activeStyle>
-            <img style={{ width: "150px" }} src={logo} />
+            Home
           </NavLink>
           <NavLink to="/table" activeStyle>
             Options
