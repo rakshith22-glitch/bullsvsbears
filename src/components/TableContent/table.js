@@ -33,7 +33,7 @@ function TableContent() {
   const [message, setMessage] = useState("");
   const [data2, setData2] = useState([]);
   const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const [rowsPerPage, setRowsPerPage] = React.useState(25);
   const [rows, setrows] = useState([]);
   const [goldenemail, setgoldenemail] = useState([]);
   let new_golden_sweeps = [];
@@ -87,8 +87,8 @@ function TableContent() {
       accessor: "date_expiration",
     },
     {
-      Header: "description",
-      accessor: "description",
+      Header: "open_interest",
+      accessor: "open_interest",
     },
     // {
     //   Header: "fill",
@@ -201,10 +201,7 @@ function TableContent() {
     } catch (err) {
       // catches errors both in fetch and response.json
       console.log(err);
-    } finally {
-      // do it again in 2 seconds
-      setTimeout(getData, 2000);
-    }
+    } 
   };
   // emailjs
   //   .send(
@@ -435,53 +432,66 @@ function TableContent() {
               size="small"
               aria-label="a dense table"
               style={{
-                backgroundColor: "gray",
+                backgroundColor: "black",
                 border: "3px solid gray",
-                fontSize: "10px",
+                fontSize: "5px",
               }}
             >
               <TableHead
                 style={{
-                  backgroundColor: "white",
-                  height: "60px",
+                  backgroundColor: "black",
+                  color:"white",
+                  height: "30px",
                 }}
               >
                 <TableRow>
-                  <TableCell style={{ fontWeight: "bold" }} align="center">
-                    TICKER
-                  </TableCell>
-                  <TableCell
-                    style={{ fontWeight: "bold", width: "30%" }}
-                    align="center"
-                  >
-                    DESCRIPTION
-                  </TableCell>
-                  <TableCell style={{ fontWeight: "bold" }} align="left">
-                    EXP
-                  </TableCell>
-                  <TableCell style={{ fontWeight: "bold" }} align="center">
+                <TableCell style={{ fontWeight: "bold" ,color:"white", }} align="center">
                     DATE
                   </TableCell>
-                  {/* <TableCell align="right">data</TableCell> */}
-
-                  <TableCell style={{ fontWeight: "bold" }} align="center">
-                    INTEREST
+                  <TableCell style={{ fontWeight: "bold",color:"white", }} align="center">
+                    TICKER
                   </TableCell>
-                  <TableCell style={{ fontWeight: "bold" }} align="center">
-                    OPTIONS SIZE
+                  <TableCell style={{ fontWeight: "bold",color:"white",  }} align="center">
+                    EXP
                   </TableCell>
-                  <TableCell style={{ fontWeight: "bold" }} align="right">
+                  <TableCell
+                    style={{ fontWeight: "bold",color:"white",   }}
+                    align="center"
+                  >
+                    OI
+                  </TableCell>
+                  
+               
+                  <TableCell style={{ fontWeight: "bold" ,color:"white", }} align="center">
+                    SIZE
+                  </TableCell>
+                  <TableCell style={{ fontWeight: "bold" ,color:"white", }} align="center">
+                    DTE
+                  </TableCell>
+                  <TableCell style={{ fontWeight: "bold" ,color:"white", }} align="center">
+                    COST
+                  </TableCell>
+                  <TableCell style={{ fontWeight: "bold" ,color:"white", }} align="center">
+                    % MOVE
+                  </TableCell>              
+                  <TableCell style={{ fontWeight: "bold" ,color:"white", }} align="center">
                     SPOT
                   </TableCell>
-                  <TableCell style={{ fontWeight: "bold" }} align="center">
+                  <TableCell style={{ fontWeight: "bold",color:"white",  }} align="center">
                     PRICE
                   </TableCell>
-                  <TableCell style={{ fontWeight: "bold" }} align="center">
+                  <TableCell style={{ fontWeight: "bold" ,color:"white", }} align="center">
+                    TYPE
+                  </TableCell>
+                  <TableCell style={{ fontWeight: "bold" ,color:"white", }} align="center">
+                   AI
+                  </TableCell>
+                  <TableCell style={{ fontWeight: "bold" ,color:"white", }} align="center">
                     PUT/CALL
                   </TableCell>
                 </TableRow>
               </TableHead>
-              <TableBody>
+              <TableBody >
                 {(rowsPerPage > 0
                   ? rows.slice(
                       page * rowsPerPage,
@@ -490,57 +500,60 @@ function TableContent() {
                   : rows
                 ).map((data) => (
                   <TableRow
-                    key={data.name}
+                    key={data.id}
                     style={
-                      data.chan_filter === "GOLDEN"
-                        ? { backgroundColor: "gold" }
-                        : {}
+                      data.chan_filter === "GOLDEN"  ||  data.chan_filter === "ROSE"
+                        ? { backgroundColor: "gold"}
+                        : {  }
+                   
                     }
                   >
-                    {/* <TableCell component="th" scope="data">
-                      {data.description}
-                    </TableCell> */}
-                    <TableCell style={{ color: "white" }} align="center">
+                   <TableCell style={{ color: "white" }} align="right">
+                      {data.date}
+                    </TableCell>
+                    <TableCell style={{ color: "white",}} align="center">
                       {data.ticker}
                     </TableCell>
                     <TableCell
-                      id="description"
-                      style={{ color: "white" }}
-                      align="right"
-                    >
-                      {data.description}
-                    </TableCell>
-                    <TableCell
-                      style={{ color: "white", paddingRight: "40px" }}
+                      style={{ color: "white", }}
                       align="right"
                     >
                       {data.date_expiration}
                     </TableCell>
-                    <TableCell style={{ color: "white" }} align="right">
-                      {data.date}
+                    <TableCell
+                      id="open_interest"
+                      style={{ color: "white" }}
+                      align="center"
+                    >
+                      {data.open_interest}
                     </TableCell>
+                  
+                    
                     {/* <TableCell align="right">{data.volume}</TableCell> */}
 
                     <TableCell style={{ color: "white" }} align="center">
-                      {data.open_interest}
-                    </TableCell>
-                    <TableCell style={{ color: "white" }} align="center">
                       {data.size}
                     </TableCell>
-                    <TableCell style={{ color: "white" }} align="right">
+                    <TableCell style={{ color: "white" }} align="center">
+                      {data.DTE}
+                    </TableCell>
+                    <TableCell style={{ color: "white" }} align="center">
+                      {data.cost_basis}
+                    </TableCell>
+                    <TableCell style={{ color: "white" }} align="center">
+                      {data.percent_move}
+                    </TableCell>
+                    <TableCell style={{color: "white"  }} align="center">
                       {data.spot}
                     </TableCell>
-                    {/* <TableCell style={{ width: "20px" }} align="right">
-                      {data.chan_filter}
-                    </TableCell> */}
-                    <TableCell
-                      style={{
-                        fontWeight: "bold",
-                        color: "black",
-                      }}
-                      align="center"
-                    >
+                    <TableCell style={{color: "white"  }} align="center">
                       {data.price}
+                    </TableCell>
+                    <TableCell style={{color: "white"  }} align="center">
+                      {data.chan_filter}
+                    </TableCell>
+                    <TableCell style={{color: "white"  }} align="center">
+                      {data.aggressor_ind}
                     </TableCell>
                     <TableCell
                       style={
@@ -557,15 +570,19 @@ function TableContent() {
                     </TableCell>
                   </TableRow>
                 ))}
+                        {emptyRows > 0 && (
+                  <TableRow style={{ height: 53 * emptyRows }}>
+                    <TableCell colSpan={6} />
+                  </TableRow>
+                )}
               </TableBody>
             </Table>
             <div style={{ marginLeft: "40%" }}>
               <TablePagination
                 rowsPerPageOptions={[
-                  10,
-                  20,
-                  30,
+                  25,
                   50,
+                  100,
                   { label: "All", value: -1 },
                 ]}
                 colSpan={3}

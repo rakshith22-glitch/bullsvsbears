@@ -33,7 +33,7 @@ function Golden() {
   const [message, setMessage] = useState("");
   const [data2, setData2] = useState([]);
   const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const [rowsPerPage, setRowsPerPage] = React.useState(25);
   const [rows, setrows] = useState([]);
   const [goldenemail, setgoldenemail] = useState([]);
 
@@ -412,160 +412,180 @@ function Golden() {
         ) : (
           // <Table style={mystyle} columns={columns} data={data} />
           <TableContainer>
-            <Table
-              sx={{ minWidth: 650 }}
-              size="small"
-              aria-label="a dense table"
+          <Table
+            sx={{ minWidth: 650 }}
+            size="small"
+            aria-label="a dense table"
+            style={{
+              backgroundColor: "black",
+              border: "3px solid gray",
+              fontSize: "5px",
+            }}
+          >
+            <TableHead
               style={{
-                backgroundColor: "gray",
-                border: "3px solid gray",
-                fontSize: "10px",
+                backgroundColor: "black",
+                color:"white",
+                height: "30px",
               }}
             >
-              <TableHead
-                style={{
-                  backgroundColor: "white",
-                  height: "60px",
-                }}
-              >
-                <TableRow>
-                  <TableCell style={{ fontWeight: "bold" }} align="center">
-                    TICKER
+              <TableRow>
+              <TableCell style={{ fontWeight: "bold" ,color:"white", }} align="center">
+                  DATE
+                </TableCell>
+                <TableCell style={{ fontWeight: "bold",color:"white", }} align="center">
+                  TICKER
+                </TableCell>
+                <TableCell style={{ fontWeight: "bold",color:"white",  }} align="center">
+                  EXP
+                </TableCell>
+                <TableCell
+                  style={{ fontWeight: "bold",color:"white",   }}
+                  align="center"
+                >
+                  OI
+                </TableCell>
+                
+             
+                <TableCell style={{ fontWeight: "bold" ,color:"white", }} align="center">
+                  SIZE
+                </TableCell>
+                <TableCell style={{ fontWeight: "bold" ,color:"white", }} align="center">
+                  DTE
+                </TableCell>
+                <TableCell style={{ fontWeight: "bold" ,color:"white", }} align="center">
+                  COST
+                </TableCell>
+                <TableCell style={{ fontWeight: "bold" ,color:"white", }} align="center">
+                  % MOVE
+                </TableCell>              
+                <TableCell style={{ fontWeight: "bold" ,color:"white", }} align="center">
+                  SPOT
+                </TableCell>
+                <TableCell style={{ fontWeight: "bold",color:"white",  }} align="center">
+                  PRICE
+                </TableCell>
+                <TableCell style={{ fontWeight: "bold" ,color:"white", }} align="center">
+                  TYPE
+                </TableCell>
+                <TableCell style={{ fontWeight: "bold" ,color:"white", }} align="center">
+                 AI
+                </TableCell>
+                <TableCell style={{ fontWeight: "bold" ,color:"white", }} align="center">
+                  PUT/CALL
+                </TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody >
+              {(rowsPerPage > 0
+                ? rows.slice(
+                    page * rowsPerPage,
+                    page * rowsPerPage + rowsPerPage
+                  )
+                : rows
+              ).map((data) => (
+                <TableRow
+                  key={data.id}
+                  style={
+                   
+                    data.chan_filter === "GOLDEN"
+                      ? { backgroundColor: "gold" ,}
+                      : {}
+                  }
+                >
+                 <TableCell style={{ color: "white" }} align="right">
+                    {data.date}
+                  </TableCell>
+                  <TableCell style={{ color: "white",}} align="center">
+                    {data.ticker}
                   </TableCell>
                   <TableCell
-                    style={{ fontWeight: "bold", width: "30%" }}
+                    style={{ color: "white", }}
+                    align="right"
+                  >
+                    {data.date_expiration}
+                  </TableCell>
+                  <TableCell
+                    id="open_interest"
+                    style={{ color: "white" }}
                     align="center"
                   >
-                    DESCRIPTION
+                    {data.open_interest}
                   </TableCell>
-                  <TableCell style={{ fontWeight: "bold" }} align="left">
-                    EXP
-                  </TableCell>
-                  <TableCell style={{ fontWeight: "bold" }} align="center">
-                    DATE
-                  </TableCell>
-                  {/* <TableCell align="right">data</TableCell> */}
+                
+                  
+                  {/* <TableCell align="right">{data.volume}</TableCell> */}
 
-                  <TableCell style={{ fontWeight: "bold" }} align="center">
-                    INTEREST
+                  <TableCell style={{ color: "white" }} align="center">
+                    {data.size}
                   </TableCell>
-                  <TableCell style={{ fontWeight: "bold" }} align="center">
-                    OPTIONS SIZE
+                  <TableCell style={{ color: "white" }} align="center">
+                    {data.DTE}
                   </TableCell>
-                  <TableCell style={{ fontWeight: "bold" }} align="right">
-                    SPOT
+                  <TableCell style={{ color: "white" }} align="center">
+                    {data.cost_basis}
                   </TableCell>
-                  <TableCell style={{ fontWeight: "bold" }} align="center">
-                    PRICE
+                  <TableCell style={{ color: "white" }} align="center">
+                    {data.percent_move}
                   </TableCell>
-                  <TableCell style={{ fontWeight: "bold" }} align="center">
-                    PUT/CALL
+                  <TableCell style={{color: "white"  }} align="center">
+                    {data.spot}
+                  </TableCell>
+                  <TableCell style={{color: "white"  }} align="center">
+                    {data.price}
+                  </TableCell>
+                  <TableCell style={{color: "white"  }} align="center">
+                    {data.chan_filter}
+                  </TableCell>
+                  <TableCell style={{color: "white"  }} align="center">
+                    {data.aggressor_ind}
+                  </TableCell>
+                  <TableCell
+                    style={
+                      data.put_call === "CALL"
+                        ? {
+                            backgroundColor: "lightgreen",
+                            fontWeight: "bold",
+                          }
+                        : { backgroundColor: "orange", fontWeight: "bold" }
+                    }
+                    align="center"
+                  >
+                    {data.put_call} - {data.sentiment}
                   </TableCell>
                 </TableRow>
-              </TableHead>
-              <TableBody>
-                {(rowsPerPage > 0
-                  ? rows.slice(
-                      page * rowsPerPage,
-                      page * rowsPerPage + rowsPerPage
-                    )
-                  : rows
-                ).map((data) => (
-                  <TableRow
-                    key={data.name}
-                    style={
-                      data.chan_filter === "GOLDEN"
-                        ? { backgroundColor: "gold" }
-                        : {}
-                    }
-                  >
-                    {/* <TableCell component="th" scope="data">
-                      {data.description}
-                    </TableCell> */}
-                    <TableCell style={{ color: "white" }} align="center">
-                      {data.ticker}
-                    </TableCell>
-                    <TableCell
-                      id="description"
-                      style={{ color: "white" }}
-                      align="right"
-                    >
-                      {data.description}
-                    </TableCell>
-                    <TableCell
-                      style={{ color: "white", paddingRight: "40px" }}
-                      align="right"
-                    >
-                      {data.date_expiration}
-                    </TableCell>
-                    <TableCell style={{ color: "white" }} align="right">
-                      {data.date}
-                    </TableCell>
-                    {/* <TableCell align="right">{data.volume}</TableCell> */}
-
-                    <TableCell style={{ color: "white" }} align="center">
-                      {data.open_interest}
-                    </TableCell>
-                    <TableCell style={{ color: "white" }} align="center">
-                      {data.size}
-                    </TableCell>
-                    <TableCell style={{ color: "white" }} align="right">
-                      {data.spot}
-                    </TableCell>
-                    {/* <TableCell style={{ width: "20px" }} align="right">
-                      {data.chan_filter}
-                    </TableCell> */}
-                    <TableCell
-                      style={{
-                        fontWeight: "bold",
-                        color: "black",
-                      }}
-                      align="center"
-                    >
-                      {data.price}
-                    </TableCell>
-                    <TableCell
-                      style={
-                        data.put_call === "CALL"
-                          ? {
-                              backgroundColor: "lightgreen",
-                              fontWeight: "bold",
-                            }
-                          : { backgroundColor: "orange", fontWeight: "bold" }
-                      }
-                      align="center"
-                    >
-                      {data.put_call} - {data.sentiment}
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-            <div style={{ marginLeft: "40%" }}>
-              <TablePagination
-                rowsPerPageOptions={[
-                  10,
-                  20,
-                  30,
-                  50,
-                  { label: "All", value: -1 },
-                ]}
-                colSpan={3}
-                count={rows.length}
-                rowsPerPage={rowsPerPage}
-                page={page}
-                SelectProps={{
-                  inputProps: {
-                    "aria-label": "rows per page",
-                  },
-                  native: true,
-                }}
-                onPageChange={handleChangePage}
-                onRowsPerPageChange={handleChangeRowsPerPage}
-                ActionsComponent={TablePaginationActions}
-              />
-            </div>
-          </TableContainer>
+              ))}
+                      {emptyRows > 0 && (
+                <TableRow style={{ height: 53 * emptyRows }}>
+                  <TableCell colSpan={6} />
+                </TableRow>
+              )}
+            </TableBody>
+          </Table>
+          <div style={{ marginLeft: "40%" }}>
+            <TablePagination
+              rowsPerPageOptions={[
+                25,
+                50,
+                100,
+                { label: "All", value: -1 },
+              ]}
+              colSpan={3}
+              count={rows.length}
+              rowsPerPage={rowsPerPage}
+              page={page}
+              SelectProps={{
+                inputProps: {
+                  "aria-label": "rows per page",
+                },
+                native: true,
+              }}
+              onPageChange={handleChangePage}
+              onRowsPerPageChange={handleChangeRowsPerPage}
+              ActionsComponent={TablePaginationActions}
+            />
+          </div>
+        </TableContainer>
         )}
       </div>
     </div>

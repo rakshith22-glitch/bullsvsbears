@@ -33,9 +33,10 @@ function PutsOnly() {
   const [message, setMessage] = useState("");
   const [data2, setData2] = useState([]);
   const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const [rowsPerPage, setRowsPerPage] = React.useState(25);
   const [rows, setrows] = useState([]);
   const [goldenemail, setgoldenemail] = useState([]);
+  const [toggle, setToggle] = useState(false);
   let new_golden_sweeps = [];
 
   // Avoid a layout jump when reaching the last page with empty rows.
@@ -171,7 +172,27 @@ function PutsOnly() {
       accessor: "volume",
     },
   ]);
+  const handleChange = (event) => {
+    setMessage(event.target.value.toUpperCase());
 
+    console.log("value is:", event.target.value);
+  };
+
+  const handleClick = (event) => {
+    setToggle(true);
+
+    event.preventDefault();
+ 
+    // 👇️ value of input field
+    console.log("handleClick 👉️", message);
+    let search_stocks = [];
+    
+    let individualElements = data.forEach((elements) => {
+      if (elements.ticker === message) search_stocks.push(elements);
+      setrows(search_stocks);
+   
+    });
+  };
   // ---------------------------------------------------------- TABLE DATA -------------------------------------------------//
   useEffect(() => {
     setLoadingData(false);
@@ -208,55 +229,21 @@ function PutsOnly() {
       // catches errors both in fetch and response.json
       console.log(err);
     } finally {
-      // do it again in 2 seconds
-      setTimeout(getData, 2000);
+      if(!toggle){
+        setTimeout(getData, 20000);
+      }
+      else{
+        setTimeout(getData, 20000);
+      }
     }
   };
 
-  //   function GoldenSweeps() {
-  //     let golden_sweeps = [];
-  //     data.forEach((elements) => {
-  //       if (elements.chan_filter === "GOLDEN") golden_sweeps.push(elements);
-  //       setrows(golden_sweeps);
-  //     });
-  //   }
 
-  //   function allCalls() {
-  //     let calls = [];
-  //     data.forEach((elements) => {
-  //       if (elements.put_call === "CALL") calls.push(elements);
-  //       setrows(calls);
-  //     });
-  //   }
+  // function Regular() {
+  //   getData();
+  // }
 
-  //   function allPuts() {
-  //     let puts = [];
-  //     data.forEach((elements) => {
-  //       if (elements.put_call === "PUT") puts.push(elements);
-  //       setrows(puts);
-  //     });
-  //   }
-  function Regular() {
-    getData();
-  }
 
-  const handleChange = (event) => {
-    setMessage(event.target.value.toUpperCase());
-
-    console.log("value is:", event.target.value);
-  };
-
-  const handleClick = (event) => {
-    event.preventDefault();
-
-    // 👇️ value of input field
-    console.log("handleClick 👉️", message);
-    let search_stocks = [];
-    let individualElements = data.forEach((elements) => {
-      if (elements.ticker === message) search_stocks.push(elements);
-      setrows(search_stocks);
-    });
-  };
 
   function TablePaginationActions(props) {
     const theme = useTheme();
@@ -455,53 +442,66 @@ function PutsOnly() {
               size="small"
               aria-label="a dense table"
               style={{
-                backgroundColor: "gray",
+                backgroundColor: "black",
                 border: "3px solid gray",
-                fontSize: "10px",
+                fontSize: "5px",
               }}
             >
               <TableHead
                 style={{
-                  backgroundColor: "white",
-                  height: "60px",
+                  backgroundColor: "black",
+                  color:"white",
+                  height: "30px",
                 }}
               >
                 <TableRow>
-                  <TableCell style={{ fontWeight: "bold" }} align="center">
-                    TICKER
-                  </TableCell>
-                  <TableCell
-                    style={{ fontWeight: "bold", width: "30%" }}
-                    align="center"
-                  >
-                    DESCRIPTION
-                  </TableCell>
-                  <TableCell style={{ fontWeight: "bold" }} align="left">
-                    EXP
-                  </TableCell>
-                  <TableCell style={{ fontWeight: "bold" }} align="center">
+                <TableCell style={{ fontWeight: "bold" ,color:"white", }} align="center">
                     DATE
                   </TableCell>
-                  {/* <TableCell align="right">data</TableCell> */}
-
-                  <TableCell style={{ fontWeight: "bold" }} align="center">
-                    INTEREST
+                  <TableCell style={{ fontWeight: "bold",color:"white", }} align="center">
+                    TICKER
                   </TableCell>
-                  <TableCell style={{ fontWeight: "bold" }} align="center">
-                    OPTIONS SIZE
+                  <TableCell style={{ fontWeight: "bold",color:"white",  }} align="center">
+                    EXP
                   </TableCell>
-                  <TableCell style={{ fontWeight: "bold" }} align="right">
+                  <TableCell
+                    style={{ fontWeight: "bold",color:"white",   }}
+                    align="center"
+                  >
+                    OI
+                  </TableCell>
+                  
+               
+                  <TableCell style={{ fontWeight: "bold" ,color:"white", }} align="center">
+                    SIZE
+                  </TableCell>
+                  <TableCell style={{ fontWeight: "bold" ,color:"white", }} align="center">
+                    DTE
+                  </TableCell>
+                  <TableCell style={{ fontWeight: "bold" ,color:"white", }} align="center">
+                    COST
+                  </TableCell>
+                  <TableCell style={{ fontWeight: "bold" ,color:"white", }} align="center">
+                    % MOVE
+                  </TableCell>              
+                  <TableCell style={{ fontWeight: "bold" ,color:"white", }} align="center">
                     SPOT
                   </TableCell>
-                  <TableCell style={{ fontWeight: "bold" }} align="center">
+                  <TableCell style={{ fontWeight: "bold",color:"white",  }} align="center">
                     PRICE
                   </TableCell>
-                  <TableCell style={{ fontWeight: "bold" }} align="center">
+                  <TableCell style={{ fontWeight: "bold" ,color:"white", }} align="center">
+                    TYPE
+                  </TableCell>
+                  <TableCell style={{ fontWeight: "bold" ,color:"white", }} align="center">
+                   AI
+                  </TableCell>
+                  <TableCell style={{ fontWeight: "bold" ,color:"white", }} align="center">
                     PUT/CALL
                   </TableCell>
                 </TableRow>
               </TableHead>
-              <TableBody>
+              <TableBody >
                 {(rowsPerPage > 0
                   ? rows.slice(
                       page * rowsPerPage,
@@ -510,57 +510,60 @@ function PutsOnly() {
                   : rows
                 ).map((data) => (
                   <TableRow
-                    key={data.name}
+                    key={data.id}
                     style={
+                     
                       data.chan_filter === "GOLDEN"
-                        ? { backgroundColor: "gold" }
+                        ? { backgroundColor: "gold" ,}
                         : {}
                     }
                   >
-                    {/* <TableCell component="th" scope="data">
-                      {data.description}
-                    </TableCell> */}
-                    <TableCell style={{ color: "white" }} align="center">
+                   <TableCell style={{ color: "white" }} align="right">
+                      {data.date}
+                    </TableCell>
+                    <TableCell style={{ color: "white",}} align="center">
                       {data.ticker}
                     </TableCell>
                     <TableCell
-                      id="description"
-                      style={{ color: "white" }}
-                      align="right"
-                    >
-                      {data.description}
-                    </TableCell>
-                    <TableCell
-                      style={{ color: "white", paddingRight: "40px" }}
+                      style={{ color: "white", }}
                       align="right"
                     >
                       {data.date_expiration}
                     </TableCell>
-                    <TableCell style={{ color: "white" }} align="right">
-                      {data.date}
+                    <TableCell
+                      id="open_interest"
+                      style={{ color: "white" }}
+                      align="center"
+                    >
+                      {data.open_interest}
                     </TableCell>
+                  
+                    
                     {/* <TableCell align="right">{data.volume}</TableCell> */}
 
                     <TableCell style={{ color: "white" }} align="center">
-                      {data.open_interest}
-                    </TableCell>
-                    <TableCell style={{ color: "white" }} align="center">
                       {data.size}
                     </TableCell>
-                    <TableCell style={{ color: "white" }} align="right">
+                    <TableCell style={{ color: "white" }} align="center">
+                      {data.DTE}
+                    </TableCell>
+                    <TableCell style={{ color: "white" }} align="center">
+                      {data.cost_basis}
+                    </TableCell>
+                    <TableCell style={{ color: "white" }} align="center">
+                      {data.percent_move}
+                    </TableCell>
+                    <TableCell style={{color: "white"  }} align="center">
                       {data.spot}
                     </TableCell>
-                    {/* <TableCell style={{ width: "20px" }} align="right">
-                      {data.chan_filter}
-                    </TableCell> */}
-                    <TableCell
-                      style={{
-                        fontWeight: "bold",
-                        color: "black",
-                      }}
-                      align="center"
-                    >
+                    <TableCell style={{color: "white"  }} align="center">
                       {data.price}
+                    </TableCell>
+                    <TableCell style={{color: "white"  }} align="center">
+                      {data.chan_filter}
+                    </TableCell>
+                    <TableCell style={{color: "white"  }} align="center">
+                      {data.aggressor_ind}
                     </TableCell>
                     <TableCell
                       style={
@@ -577,15 +580,19 @@ function PutsOnly() {
                     </TableCell>
                   </TableRow>
                 ))}
+                        {emptyRows > 0 && (
+                  <TableRow style={{ height: 53 * emptyRows }}>
+                    <TableCell colSpan={6} />
+                  </TableRow>
+                )}
               </TableBody>
             </Table>
             <div style={{ marginLeft: "40%" }}>
               <TablePagination
                 rowsPerPageOptions={[
-                  10,
-                  20,
-                  30,
+                  25,
                   50,
+                  100,
                   { label: "All", value: -1 },
                 ]}
                 colSpan={3}
