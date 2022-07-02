@@ -60,13 +60,10 @@ function Hello() {
             borderBottomLeftRadius: 20,
           }}
         >
-          <CardHeader
-            title="About this Website !! "
-            style={{ color: "white" }}
-          />
+         
           <CardMedia component="img" height="200" image={image} />
 
-          <CardActions disableSpacing>
+          {/* <CardActions disableSpacing>
             <ExpandMore
               expand={expanded1}
               onClick={handleExpandClick1}
@@ -75,8 +72,8 @@ function Hello() {
             >
               <ExpandMoreIcon style={{ color: "white" }} />
             </ExpandMore>
-          </CardActions>
-          <Collapse in={expanded1} timeout="auto" unmountOnExit>
+          </CardActions> */}
+          {/* <Collapse in={expanded1} timeout="auto" unmountOnExit>
             <CardContent>
               <Typography paragraph style={{ color: "white" }}>
                 <h3>
@@ -87,7 +84,7 @@ function Hello() {
                 </h3>
               </Typography>
             </CardContent>
-          </Collapse>
+          </Collapse> */}
         </Card>
       </div>
       <div class="column">
@@ -105,10 +102,10 @@ function Hello() {
             borderBottomLeftRadius: 20,
           }}
         >
-          <CardHeader style={{ color: "white" }} title="Coming Soon ..." />
+          {/* <CardHeader style={{ color: "white" }} title="Coming Soon ..." /> */}
           <CardMedia component="img" height="200" image={image1} />
 
-          <CardActions disableSpacing>
+          {/* <CardActions disableSpacing>
             <ExpandMore
               expand={expanded2}
               onClick={handleExpandClick2}
@@ -129,7 +126,7 @@ function Hello() {
                 </h3>
               </Typography>
             </CardContent>
-          </Collapse>
+          </Collapse> */}
         </Card>
       </div>
       <div class="column">
@@ -147,10 +144,10 @@ function Hello() {
             borderBottomLeftRadius: 20,
           }}
         >
-          <CardHeader title="Future Ideas" style={{ color: "white" }} />
+          {/* <CardHeader title="Future Ideas" style={{ color: "white" }} /> */}
           <CardMedia component="img" height="200" image={image2} />
 
-          <CardActions disableSpacing>
+          {/* <CardActions disableSpacing>
             <ExpandMore
               expand={expanded3}
               onClick={handleExpandClick3}
@@ -171,7 +168,7 @@ function Hello() {
                 </h3>
               </Typography>
             </CardContent>
-          </Collapse>
+          </Collapse> */}
         </Card>
       </div>
     </div>

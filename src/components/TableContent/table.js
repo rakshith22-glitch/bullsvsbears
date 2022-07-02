@@ -26,6 +26,7 @@ import TextField from "@mui/material/TextField";
 import PieChart from "../PieChart/piechart";
 import emailjs from "@emailjs/browser";
 import "./table.css";
+import { Container } from "@mui/material";
 function TableContent() {
   const [data, setData] = useState([]);
   const [sweeplength, setsweeplength] = useState("");
@@ -306,7 +307,7 @@ function TableContent() {
     rowsPerPage: PropTypes.number.isRequired,
   };
   return (
-    <div>
+    <div style={{backgroundColor:"black", width:"100%"}}>
       {/* <div style={{display:"flex", justifyContent:"center", alignItems:"center", width:"80%", marginLeft:"5%" }}> */}
 
       {/* <img
@@ -394,10 +395,11 @@ function TableContent() {
           style={{
             marginLeft: "50px",
             marginRight: "5px",
-            width: "300px",
-            marginTop: "-10px",
+            width: "200px",
+           
             borderColor: "black",
             backgroundColor: "white",
+            height:"45px"
           }}
         />
         <Button
@@ -417,8 +419,8 @@ function TableContent() {
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-          width: "80%",
-          marginLeft: "10%",
+      
+          
         }}
       >
         {/* here you check if the state is loading otherwise if you wioll not call that you will get a blank page because the data is an empty array at the moment of mounting */}
@@ -428,13 +430,14 @@ function TableContent() {
           // <Table style={mystyle} columns={columns} data={data} />
           <TableContainer>
             <Table
-              sx={{ minWidth: 650 }}
+              
               size="small"
               aria-label="a dense table"
               style={{
                 backgroundColor: "black",
-                border: "3px solid gray",
+                border: "3px solid white",
                 fontSize: "5px",
+                width:"100%"
               }}
             >
               <TableHead
@@ -480,9 +483,7 @@ function TableContent() {
                   <TableCell style={{ fontWeight: "bold",color:"white",  }} align="center">
                     PRICE
                   </TableCell>
-                  <TableCell style={{ fontWeight: "bold" ,color:"white", }} align="center">
-                    TYPE
-                  </TableCell>
+                 
                   <TableCell style={{ fontWeight: "bold" ,color:"white", }} align="center">
                    AI
                   </TableCell>
@@ -508,7 +509,7 @@ function TableContent() {
                    
                     }
                   >
-                   <TableCell style={{ color: "white" }} align="right">
+                   <TableCell style={{ color: "white" }} align="center">
                       {data.date}
                     </TableCell>
                     <TableCell style={{ color: "white",}} align="center">
@@ -516,7 +517,7 @@ function TableContent() {
                     </TableCell>
                     <TableCell
                       style={{ color: "white", }}
-                      align="right"
+                      align="center"
                     >
                       {data.date_expiration}
                     </TableCell>
@@ -549,9 +550,7 @@ function TableContent() {
                     <TableCell style={{color: "white"  }} align="center">
                       {data.price}
                     </TableCell>
-                    <TableCell style={{color: "white"  }} align="center">
-                      {data.chan_filter}
-                    </TableCell>
+                   
                     <TableCell style={{color: "white"  }} align="center">
                       {data.aggressor_ind}
                     </TableCell>
@@ -577,8 +576,9 @@ function TableContent() {
                 )}
               </TableBody>
             </Table>
-            <div style={{ marginLeft: "40%" }}>
+            <div style={{ marginLeft: "40%", marginTop:"1%"  }}>
               <TablePagination
+              style={{backgroundColor:"white"}}
                 rowsPerPageOptions={[
                   25,
                   50,

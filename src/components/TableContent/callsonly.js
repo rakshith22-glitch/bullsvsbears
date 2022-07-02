@@ -33,7 +33,7 @@ function CallsOnly() {
   const [message, setMessage] = useState("");
   const [data2, setData2] = useState([]);
   const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const [rowsPerPage, setRowsPerPage] = React.useState(25);
   const [rows, setrows] = useState([]);
   const [goldenemail, setgoldenemail] = useState([]);
   let new_golden_sweeps = [];
@@ -252,7 +252,7 @@ function CallsOnly() {
     };
 
     return (
-      <Box sx={{ flexShrink: 0, ml: 2.5 }}>
+      <Box sx={{ flexShrink: 0, ml: 2.5 }} >
         <IconButton
           onClick={handleFirstPageButtonClick}
           disabled={page === 0}
@@ -300,7 +300,7 @@ function CallsOnly() {
     rowsPerPage: PropTypes.number.isRequired,
   };
   return (
-    <div>
+    <div style={{backgroundColor:"black"}}>
       {/* <div style={{display:"flex", justifyContent:"center", alignItems:"center", width:"80%", marginLeft:"5%" }}> */}
 
       {/* <img
@@ -473,9 +473,7 @@ function CallsOnly() {
                   <TableCell style={{ fontWeight: "bold",color:"white",  }} align="center">
                     PRICE
                   </TableCell>
-                  <TableCell style={{ fontWeight: "bold" ,color:"white", }} align="center">
-                    TYPE
-                  </TableCell>
+                  
                   <TableCell style={{ fontWeight: "bold" ,color:"white", }} align="center">
                    AI
                   </TableCell>
@@ -542,9 +540,7 @@ function CallsOnly() {
                     <TableCell style={{color: "white"  }} align="center">
                       {data.price}
                     </TableCell>
-                    <TableCell style={{color: "white"  }} align="center">
-                      {data.chan_filter}
-                    </TableCell>
+                   
                     <TableCell style={{color: "white"  }} align="center">
                       {data.aggressor_ind}
                     </TableCell>
@@ -570,8 +566,9 @@ function CallsOnly() {
                 )}
               </TableBody>
             </Table>
-            <div style={{ marginLeft: "40%" }}>
+            <div style={{ marginLeft: "40%", marginTop:"1%"  }}>
               <TablePagination
+                style={{backgroundColor:"white"}}
                 rowsPerPageOptions={[
                   25,
                   50,

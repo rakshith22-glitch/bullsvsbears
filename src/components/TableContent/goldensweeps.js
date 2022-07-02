@@ -292,7 +292,7 @@ function Golden() {
     rowsPerPage: PropTypes.number.isRequired,
   };
   return (
-    <div>
+    <div style={{backgroundColor:"black"}}>
       {/* <div style={{display:"flex", justifyContent:"center", alignItems:"center", width:"80%", marginLeft:"5%" }}> */}
 
       {/* <img
@@ -465,9 +465,7 @@ function Golden() {
                 <TableCell style={{ fontWeight: "bold",color:"white",  }} align="center">
                   PRICE
                 </TableCell>
-                <TableCell style={{ fontWeight: "bold" ,color:"white", }} align="center">
-                  TYPE
-                </TableCell>
+            
                 <TableCell style={{ fontWeight: "bold" ,color:"white", }} align="center">
                  AI
                 </TableCell>
@@ -534,9 +532,7 @@ function Golden() {
                   <TableCell style={{color: "white"  }} align="center">
                     {data.price}
                   </TableCell>
-                  <TableCell style={{color: "white"  }} align="center">
-                    {data.chan_filter}
-                  </TableCell>
+                  
                   <TableCell style={{color: "white"  }} align="center">
                     {data.aggressor_ind}
                   </TableCell>
@@ -562,8 +558,9 @@ function Golden() {
               )}
             </TableBody>
           </Table>
-          <div style={{ marginLeft: "40%" }}>
+          <div style={{ marginLeft: "40%" , marginTop:"1%" }}>
             <TablePagination
+              style={{backgroundColor:"white"}}
               rowsPerPageOptions={[
                 25,
                 50,

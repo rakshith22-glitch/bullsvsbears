@@ -15,7 +15,7 @@ function App() {
   const TRACKING_ID = "UA-231583167-1"; // OUR_TRACKING_ID
   ReactGA.initialize(TRACKING_ID);
   return (
-    <div className="fill-window">
+    <div className="fill-window" >
       <BrowserRouter>
         <Navbar />
         <Routes>

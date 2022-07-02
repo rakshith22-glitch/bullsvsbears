@@ -40,13 +40,13 @@ function PieChartData() {
     {
       title: "CALLS",
       value: callpercentage,
-      color: "green",
+      color: "lightgreen",
       key: "CALLS",
     },
     {
       title: "PUTS",
       value: putspercentage,
-      color: "red",
+      color: "orange",
       key: "PUTS",
     },
   ];

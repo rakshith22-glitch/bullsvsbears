@@ -229,12 +229,7 @@ function PutsOnly() {
       // catches errors both in fetch and response.json
       console.log(err);
     } finally {
-      if(!toggle){
-        setTimeout(getData, 20000);
-      }
-      else{
-        setTimeout(getData, 20000);
-      }
+      setTimeout(getData, 20000);
     }
   };
 
@@ -314,7 +309,7 @@ function PutsOnly() {
     rowsPerPage: PropTypes.number.isRequired,
   };
   return (
-    <div>
+    <div style={{backgroundColor:"black"}}>
       {/* <div style={{display:"flex", justifyContent:"center", alignItems:"center", width:"80%", marginLeft:"5%" }}> */}
 
       {/* <img
@@ -490,9 +485,7 @@ function PutsOnly() {
                   <TableCell style={{ fontWeight: "bold",color:"white",  }} align="center">
                     PRICE
                   </TableCell>
-                  <TableCell style={{ fontWeight: "bold" ,color:"white", }} align="center">
-                    TYPE
-                  </TableCell>
+               
                   <TableCell style={{ fontWeight: "bold" ,color:"white", }} align="center">
                    AI
                   </TableCell>
@@ -559,9 +552,7 @@ function PutsOnly() {
                     <TableCell style={{color: "white"  }} align="center">
                       {data.price}
                     </TableCell>
-                    <TableCell style={{color: "white"  }} align="center">
-                      {data.chan_filter}
-                    </TableCell>
+                   
                     <TableCell style={{color: "white"  }} align="center">
                       {data.aggressor_ind}
                     </TableCell>
@@ -587,8 +578,9 @@ function PutsOnly() {
                 )}
               </TableBody>
             </Table>
-            <div style={{ marginLeft: "40%" }}>
+            <div style={{ marginLeft: "40%", marginTop:"1%" }}>
               <TablePagination
+                style={{backgroundColor:"white"}}
                 rowsPerPageOptions={[
                   25,
                   50,
