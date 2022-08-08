@@ -16,4 +16,4 @@ ISSUES RESOLVED BY FOLLOWING THESE STEPS:
    build packs to react app in settings.
    
    
-   Plain and simple now deply that thing and enjoy !!!!
+   Plain and simple now deploy that thing and enjoy !!!!
