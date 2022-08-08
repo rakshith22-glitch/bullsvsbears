@@ -18,4 +18,4 @@ ISSUES RESOLVED BY FOLLOWING THESE STEPS:
    
    Plain and simple now deploy that thing and enjoy !!!!
 
-P.S FOR THE PROJECT PLEASE !
+P.S FORK THE PROJECT IF YOU WANT TO USE IT PLEASE !
