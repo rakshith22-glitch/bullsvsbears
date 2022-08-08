@@ -17,3 +17,5 @@ ISSUES RESOLVED BY FOLLOWING THESE STEPS:
    
    
    Plain and simple now deploy that thing and enjoy !!!!
+
+P.S FOR THE PROJECT PLEASE !
